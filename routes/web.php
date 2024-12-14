@@ -40,6 +40,9 @@ Route::middleware('admin')->group(function(){
         Route::get('/admin/all_category','adminAllCategory')->name('admin.all_category');
         Route::get('/admin/add_category','adminAddCategory')->name('admin.add_category');
         Route::post('/admin/category/add_submit','adminAddCategorySubmit')->name('admin.category.add.submit');
+        Route::get('/admin/edit_category/{id}','adminEditCategory')->name('admin.edit.category');
+        Route::post('/admin/category/edit_submit','adminEditCategorySubmit')->name('admin.category.edit.submit');
+        Route::get('/admin/delete_category/{id}','adminDeleteCategory')->name('admin.delete.category');
     });
 });
 

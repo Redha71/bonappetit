@@ -124,43 +124,10 @@
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.21.0/dist/jquery.validate.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('backend/assets/js/code.js') }}"></script>
     <!-- Responsive examples -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#myForm').validate({
-                rules: {
-                    category_name: {
-                        required: true,
-                    },
-                    image: {
-                        required: true,
-                    },
-
-                },
-                messages: {
-                    category_name: {
-                        required: 'Please Enter Category Name',
-                    },
-                    image: {
-                        required: 'Please Select Image',
-                    },
-
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                },
-            });
-        });
-    </script>
+    
     <script>
         @if (Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}"

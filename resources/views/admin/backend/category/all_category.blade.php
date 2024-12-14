@@ -14,7 +14,7 @@
 
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                             <li class="breadcrumb-item active">All Category</li>
                         </ol>
                     </div>
@@ -48,8 +48,8 @@
                                     <td>{{$key+1}}</td>
                                     <td>{{$item->category_name}}</td>
                                     <td> <img  src="{{asset($item->image)  }}" style="width: 70px; height=70px;" alt="gurdeep singh osahan"></td>
-                                    <td><a href="#" class="btn btn-info waves-effect waves-light">Edit</a>
-                                        <a href="#" class="btn btn-danger waves-effect waves-light">Delete</a>
+                                    <td><a href="{{route('admin.edit.category',$item->id)}}" class="btn btn-info waves-effect waves-light">Edit</a>
+                                        <a id="delete" href="{{route('admin.delete.category',$item->id)}}" class="btn btn-danger waves-effect waves-light">Delete</a>
                                     </td>
                                    
                                 </tr>   
