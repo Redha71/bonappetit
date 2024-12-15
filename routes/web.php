@@ -50,6 +50,9 @@ Route::middleware('admin')->group(function(){
 Route::controller(CityController::class)->group(function(){
     Route::get('/admin/all_city','adminAllCity')->name('admin.all_city');
     Route::post('/admin/city/add_submit','adminAddCitySubmit')->name('admin.city.add.submit');
+    Route::get('/admin/edit/city/{id}','adminEditCity');
+    Route::post('/admin/city/edit_submit','adminEditCitySubmit')->name('admin.city.edit.submit');
+    Route::get('/admin/delete_city/{id}','adminDeleteCity')->name('admin.delete.city');
 });
 });
 
