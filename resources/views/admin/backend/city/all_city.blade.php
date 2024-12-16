@@ -45,7 +45,7 @@
                                             <td> {{ $item->city_slug }}</td>
                                             <td> <button type="button" class="btn btn-primary waves-effect waves-light"
                                                     data-bs-toggle="modal" data-bs-target="#editCity"
-                                                    id="{{ $item->id }}" onclick="cityEdit(this.id)">Edit City</button>
+                                                    id="{{ $item->id }}" onclick="cityEdit(this.id)">Edit</button>
                                                 <a id="delete" href="{{ route('admin.delete.city', $item->id) }}"
                                                     class="btn btn-danger waves-effect waves-light">Delete</a>
                                             </td>

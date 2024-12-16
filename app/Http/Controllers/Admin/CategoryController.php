@@ -38,7 +38,7 @@ class CategoryController extends Controller
                 'message' => 'Category Saved Successfully',
                 'alert-type' => 'success'
             );
-            return redirect()->route('admin.all_category')->with($notifiaction);
+            return redirect()->route('admin.category.all_category')->with($notifiaction);
         }
     }
     //End

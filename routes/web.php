@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Partner\MenuController;
 use App\Http\Controllers\Partner\PartnerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -82,5 +83,10 @@ Route::middleware('partner')->group(function(){
     Route::post('/partner/profile_edit', [PartnerController::class, 'partnerProfileEdit'])->name('partner.profile.edit');
     Route::get('/partner/profile/change/password', [PartnerController::class, 'partnerProfileChangePassword'])->name('partner.profile.change.password');
     Route::post('/partner/password/change', [PartnerController::class, 'partnerPasswordChange'])->name('partner.password.change');
+    Route::controller(MenuController::class)->group(function(){
+        Route::get('/partner/all_menu','partnerAllMenu')->name('partner.all_menu');
+        Route::get('/partner/add_menu','partnerAddMenu')->name('partner.add_menu');
+        Route::post('/partner/menu/add_submit','partnerAddMenuSubmit')->name('partner.menu.add.submit');
+    });
 });
 require __DIR__.'/auth.php';

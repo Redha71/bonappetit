@@ -24,6 +24,14 @@
         <!-- App Css-->
         <link href="{{asset('backend/assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+         <!-- DataTables -->
+    <link href="{{ asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}"
+    rel="stylesheet" type="text/css" />
+<link href="{{ asset('backend/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
+    rel="stylesheet" type="text/css" />
+<!-- Responsive datatable examples -->
+<link
+    href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css') }}" />
     </head>
 
     <body>
@@ -100,6 +108,11 @@
 
         <script src="{{asset('backend/assets/js/app.js')}}"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+ <!-- Required datatable js -->
+ <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+ <script src="{{ asset('backend/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+ <!-- Datatable init js -->
+ <script src="{{ asset('backend/assets/js/pages/datatables.init.js')}}"></script>
 
         <script>
          @if(Session::has('message'))
