@@ -87,6 +87,9 @@ Route::middleware('partner')->group(function(){
         Route::get('/partner/all_menu','partnerAllMenu')->name('partner.all_menu');
         Route::get('/partner/add_menu','partnerAddMenu')->name('partner.add_menu');
         Route::post('/partner/menu/add_submit','partnerAddMenuSubmit')->name('partner.menu.add.submit');
+        Route::get('/partner/edit_menu/{id}','partnerEditMenu')->name('partner.edit.menu');
+        Route::post('/partner/menu/edit_submit','partnerEditMenuSubmit')->name('partner.menu.edit.submit');
+        Route::get('/partner/delete_menu/{id}','partnerDeleteMenu')->name('partner.delete.menu');
     });
 });
 require __DIR__.'/auth.php';

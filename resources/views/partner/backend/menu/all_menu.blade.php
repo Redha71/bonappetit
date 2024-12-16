@@ -48,8 +48,8 @@
                                     <td>{{$key+1}}</td>
                                     <td>{{$item->menu_name}}</td>
                                     <td> <img  src="{{asset($item->image)  }}" style="width: 70px; height=70px;" alt="gurdeep singh osahan"></td>
-                                    <td><a href="{{route('admin.edit.category',$item->id)}}" class="btn btn-info waves-effect waves-light">Edit</a>
-                                        <a id="delete" href="{{route('admin.delete.category',$item->id)}}" class="btn btn-danger waves-effect waves-light">Delete</a>
+                                    <td><a href="{{route('partner.edit.menu',$item->id)}}" class="btn btn-info waves-effect waves-light">Edit</a>
+                                        <a id="delete" href="{{route('partner.delete.menu',$item->id)}}" class="btn btn-danger waves-effect waves-light">Delete</a>
                                     </td>
                                    
                                 </tr>   
