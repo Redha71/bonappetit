@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Partner\MenuController;
+use App\Http\Controllers\Partner\MenuDetailsController;
 use App\Http\Controllers\Partner\PartnerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -83,6 +84,7 @@ Route::middleware('partner')->group(function(){
     Route::post('/partner/profile_edit', [PartnerController::class, 'partnerProfileEdit'])->name('partner.profile.edit');
     Route::get('/partner/profile/change/password', [PartnerController::class, 'partnerProfileChangePassword'])->name('partner.profile.change.password');
     Route::post('/partner/password/change', [PartnerController::class, 'partnerPasswordChange'])->name('partner.password.change');
+// Menu ////////
     Route::controller(MenuController::class)->group(function(){
         Route::get('/partner/all_menu','partnerAllMenu')->name('partner.all_menu');
         Route::get('/partner/add_menu','partnerAddMenu')->name('partner.add_menu');
@@ -91,5 +93,15 @@ Route::middleware('partner')->group(function(){
         Route::post('/partner/menu/edit_submit','partnerEditMenuSubmit')->name('partner.menu.edit.submit');
         Route::get('/partner/delete_menu/{id}','partnerDeleteMenu')->name('partner.delete.menu');
     });
+// Menu Details ////////
+Route::controller(MenuDetailsController::class)->group(function(){
+    Route::get('/partner/all_menu_details','partnerAllMenuDetails')->name('partner.all_menu_details');
+    Route::get('/partner/add_menu_details','partnerAddMenuDetials')->name('partner.add_menu_details');
+    Route::post('/partner/menu_details/add_submit','partnerAddMenuDetialsSubmit')->name('partner.menu.detials.add.submit');
+    Route::get('/partner/edit_menu_detials/{id}','partnerEditMenuDetials')->name('partner.edit.menu_detials');
+    Route::post('/partner/menu_detials/edit_submit','partnerEditMenuDetialsSubmit')->name('partner.menu.detials.edit.submit');
+    Route::get('/partner/delete/menu_detials/{id}','partnerDeleteMenuDetials')->name('partner.delete.menu_detials');
+    Route::get('/changeStatus','changeStatus');
+});
 });
 require __DIR__.'/auth.php';

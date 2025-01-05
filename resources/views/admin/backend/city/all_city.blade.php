@@ -149,6 +149,7 @@
             url: '/admin/edit/city/'+id,
             dataType: 'json',
             success:function(data){
+                
                 $('#cityN').val(data.city_name);
                 $('#cityI').val(data.id)
             }

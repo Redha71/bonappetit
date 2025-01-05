@@ -1,6 +1,6 @@
 @extends('partner.dashboard')
 @section('partner')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <div class="page-content">
         <div class="container-fluid">
 
@@ -32,7 +32,7 @@
 
                         </div>
                         <div class="card-body p-4">
-                            <form id="myForm" action="{{ route('partner.menu.add.submit') }}" method="post"
+                            <form id="mymenu" action="{{ route('partner.menu.add.submit') }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
@@ -93,13 +93,13 @@
                 }
                 reader.readAsDataURL(e.target.files['0']);
             })
-        })
+        });
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#myForm').validate({
+            $('#mymenu').validate({
                 rules: {
-                    category_name: {
+                    menu_name: {
                         required: true,
                     },
                     image: {
@@ -108,7 +108,7 @@
 
                 },
                 messages: {
-                    category_name: {
+                    menu_name: {
                         required: 'Please Enter Category Name',
                     },
                     image: {

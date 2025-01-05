@@ -10,6 +10,7 @@ use Intervention\Image\ImageManager;
 
 class MenuController extends Controller
 {
+
     public function partnerAllMenu()
     {
         $menu = Menu::latest()->get();

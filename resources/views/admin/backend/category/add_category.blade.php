@@ -93,7 +93,7 @@
                 }
                 reader.readAsDataURL(e.target.files['0']);
             })
-        })
+        });
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
