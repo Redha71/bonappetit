@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Siteemail;
+use App\Models\City;
 use Illuminate\Support\Facades\Auth;
 
 class PartnerController extends Controller
@@ -151,9 +152,10 @@ class PartnerController extends Controller
   }
   //End
   public function partnerProfile(){
+    $city=City::latest()->get();
     $id= Auth::guard('partner')->id();
     $profile_data= Partner::find($id);
-    return view('partner.partner_profile',compact('profile_data'));
+    return view('partner.partner_profile',compact('profile_data','city'));
   }
   //End
   public function partnerProfileEdit(Request $request){
@@ -163,7 +165,12 @@ class PartnerController extends Controller
     $profile_data->email= $request->email;
     $profile_data->phone = $request->phone;
     $profile_data->address = $request->address;
-    $oldImage = $profile_data->image;  
+    $profile_data->city_id = $request->city_id;
+    $profile_data->res_info = $request->res_info;
+    $profile_data->map_link = $request->map_link;
+    $profile_data->res_open_time = $request->res_open_time;
+    $oldImage = $profile_data->image;
+    $oldCoverImage = $profile_data->image_cover;  
     if($request->hasFile('image')){
       $file= $request->file('image');
       $file_name= time().'.'.$file->getClientOriginalExtension();
@@ -172,9 +179,15 @@ class PartnerController extends Controller
       if($oldImage && $oldImage !== $file_name){
         $this->oldImageDelete($oldImage);
       }
-
-      
-
+    }
+    if($request->hasFile('image_cover')){
+      $filec= $request->file('image_cover');
+      $file_namec= time().'.'.$filec->getClientOriginalExtension();
+      $filec->move(public_path('image/Partner_image'), $file_namec);
+      $profile_data->image_cover = $file_namec;
+      if($oldCoverImage && $oldCoverImage !== $file_namec){
+        $this->oldImageDelete($oldCoverImage);
+      }
     }
     $profile_data->save();
     $notifiaction = array(

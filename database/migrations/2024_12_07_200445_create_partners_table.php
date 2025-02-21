@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->integer('city_id')->nullable();
+            $table->string('image_cover')->nullable();
+            $table->string('map_link')->nullable();
+            $table->text('res_info')->nullable();
+            $table->string('res_open_time')->nullable();
             $table->string('role')->default('partner');
             $table->string('status')->default('1');
             $table->string('password');

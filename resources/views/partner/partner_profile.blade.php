@@ -86,14 +86,32 @@
                                                     value="{{ $profile_data->email }}">
                                             </div>
                                             <div class="mb-3">
+                                                <label for="example-text-input" class="form-label">City</label>
+                                                <select class="form-select" name="city_id">
+                                                    <option selected="" disabled="">Select</option>
+                                                    @foreach ($city as $item)
+                                                        <option value="{{ $item->id }}" {{$item->id ==$profile_data->city_id ? 'selected' : ''}}>{{ $item->city_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                           
+                                            <div class="mb-3">
                                                 <label for="example-text-input" class="form-label">Photo</label>
                                                 <input class="form-control" type="file" name="image" id="image">
                                             </div>
-                                            <div class="mt-4">
-
-                                                <button type="submit"
-                                                    class="btn btn-primary waves-effect waves-light">Edit</button>
+                                            <div class="avatar-xl me-3">
+                                                <img src="{{ !empty($profile_data->image)
+                                                    ? url('image/partner_image/' . $profile_data->image)
+                                                    : url('image/no_image.jpg') }}"
+                                                    alt="" width="110" class="rounded-circle p-1 bg-primary" id="showImage">
                                             </div>
+                                           
+                                            <div class="mb-3 pt-5">
+                                                <label for="example-text-input" class="form-label">Restaurant Information</label>
+                                                <textarea id="basicpill-address-input" name="res_info" class="form-control" rows="2"
+                                                 placeholder="Restaurant Informations">{{$profile_data->res_info}}</textarea>
+                                            </div>
+                                            
 
                                         </div>
                                     </div>
@@ -111,13 +129,33 @@
                                                 <input class="form-control" type="text" name="address"
                                                     value="{{ $profile_data->address }}">
                                             </div>
-                                            <div class="avatar-xl me-3">
-                                                <img src="{{ !empty($profile_data->image)
-                                                    ? url('image/partner_image/' . $profile_data->image)
-                                                    : url('image/no_image.jpg') }}"
-                                                    alt="" width="110" class="rounded-circle p-1 bg-primary" id="showImage">
+                                            <div class="mb-3">
+                                                <label for="example-text-input" class="form-label">Map Link</label>
+                                                <input class="form-control" type="text" name="map_link"
+                                                    value="{{ $profile_data->map_link }}">
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="example-text-input" class="form-label">Cover Restaurant</label>
+                                                <input class="form-control" type="file" name="image_cover" id="image1">
+                                            </div>
+                                            <div class="avatar-xl me-3 pb-3">
+                                                <img src="{{ !empty($profile_data->image_cover)
+                                                    ? url('image/partner_image/' . $profile_data->image_cover)
+                                                    : url('image/no_image.jpg') }}"
+                                                    alt="" width="200" height="100" class=" p-1 bg-primary" id="showImage1">
+                                            </div>
+                                            <div class="mb-3 pt-5">
+                                                <label for="example-text-input" class="form-label">Open Time</label>
+                                                <input class="form-control" type="text" name="res_open_time"
+                                                    value="{{ $profile_data->res_open_time }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mt-4">
 
+                                            <button type="submit"
+                                                class="btn btn-primary waves-effect waves-light">Save Change</button>
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +182,18 @@
                 $('#showImage').attr('src',e.target.result);
             }
             reader.readAsDataURL(e.target.files['0']);
-        })
+        });
+       
+    })
+    $(document).ready(function(){
+        $('#image1').change(function(e){
+            var reader= new FileReader();
+            reader.onload =function(e){
+                $('#showImage1').attr('src',e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+       
     })
 
     </script>
