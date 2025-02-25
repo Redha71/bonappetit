@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Partner\CouponController;
 use App\Http\Controllers\Partner\GalleryController;
 use App\Http\Controllers\Partner\MenuController;
 use App\Http\Controllers\Partner\MenuDetailsController;
@@ -104,6 +105,7 @@ Route::middleware('partner')->group(function () {
         Route::get('/partner/delete/menu_detials/{id}', 'partnerDeleteMenuDetials')->name('partner.delete.menu_detials');
         Route::get('/changeStatus', 'changeStatus');
     });
+    // Gallery ////////
     Route::controller(GalleryController::class)->group(function () {
         Route::get('/gallery/all', 'galleryAll')->name('gallery.all');
         Route::get('/gallery/add', 'addGallery')->name('add.gallery');
@@ -111,6 +113,15 @@ Route::middleware('partner')->group(function () {
         Route::get('/gallary/edit/{id}', 'editGallary')->name('edit.gallary');
         Route::post('/gallary/update', 'gallaryUpdate')->name('gallary.update');
         Route::get('/partner/delete_menu/{id}', 'deleteGallary')->name('delete.gallary');
+    });
+     // Coupon ////////
+     Route::controller(CouponController::class)->group(function () {
+        Route::get('/partner/all_coupon', 'allCoupon')->name('coupon.all');
+        Route::get('/partner/add_coupon', 'addCoupon')->name('add.coupon');
+        Route::post('/partner/coupon/add_submit', 'addCouponSubmit')->name('coupon.add.submit');
+        Route::get('/partner/edit_menu/{id}', 'partnerEditMenu')->name('partner.edit.menu');
+        Route::post('/partner/menu/edit_submit', 'partnerEditMenuSubmit')->name('partner.menu.edit.submit');
+        Route::get('/partner/delete_menu/{id}', 'partnerDeleteMenu')->name('partner.delete.menu');
     });
 });
 require __DIR__ . '/auth.php';
