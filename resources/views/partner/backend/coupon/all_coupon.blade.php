@@ -60,8 +60,8 @@
                                         <span class="badge rounded-bill bg-danger">Invalid</span>
                                         @endif
                                         </td>
-                                    <td><a href="{{route('partner.edit.menu',$item->id)}}" class="btn btn-info waves-effect waves-light">Edit</a>
-                                        <a id="delete" href="{{route('partner.delete.menu',$item->id)}}" class="btn btn-danger waves-effect waves-light">Delete</a>
+                                    <td><a href="{{route('edit.coupon',$item->id)}}" class="btn btn-info waves-effect waves-light">Edit</a>
+                                        <a id="delete" href="{{route('delete.coupon',$item->id)}}" class="btn btn-danger waves-effect waves-light">Delete</a>
                                     </td>
                                    
                                 </tr>   

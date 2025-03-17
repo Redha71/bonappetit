@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ManageController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Partner\CouponController;
 use App\Http\Controllers\Partner\GalleryController;
@@ -58,6 +59,16 @@ Route::middleware('admin')->group(function () {
         Route::post('/admin/city/edit_submit', 'adminEditCitySubmit')->name('admin.city.edit.submit');
         Route::get('/admin/delete_city/{id}', 'adminDeleteCity')->name('admin.delete.city');
     });
+     // Admin Menu Details ////////
+     Route::controller(ManageController::class)->group(function () {
+        Route::get('/admin/all_menu_details', 'adminAllMenuDetails')->name('admin.all_menu_details');
+        Route::get('/admin/add_menu_details', 'adminAddMenuDetials')->name('admin.add_menu_details');
+        Route::post('/admin/menu_details/add_submit', 'adminAddMenuDetialsSubmit')->name('admin.menu.detials.add.submit');
+        Route::get('/admin/edit_menu_detials/{id}', 'adminEditMenuDetials')->name('admin.edit.menu_detials');
+        Route::post('/admin/menu_detials/edit_submit', 'adminEditMenuDetialsSubmit')->name('admin.menu.detials.edit.submit');
+        Route::get('/admin/delete/menu_detials/{id}', 'adminDeleteMenuDetials')->name('admin.delete.menu_detials');
+
+    });
 });
 
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
@@ -103,7 +114,7 @@ Route::middleware('partner')->group(function () {
         Route::get('/partner/edit_menu_detials/{id}', 'partnerEditMenuDetials')->name('partner.edit.menu_detials');
         Route::post('/partner/menu_detials/edit_submit', 'partnerEditMenuDetialsSubmit')->name('partner.menu.detials.edit.submit');
         Route::get('/partner/delete/menu_detials/{id}', 'partnerDeleteMenuDetials')->name('partner.delete.menu_detials');
-        Route::get('/changeStatus', 'changeStatus');
+
     });
     // Gallery ////////
     Route::controller(GalleryController::class)->group(function () {
@@ -112,16 +123,17 @@ Route::middleware('partner')->group(function () {
         Route::post('/gallsry/store', 'storeGallary')->name('gallary.store');
         Route::get('/gallary/edit/{id}', 'editGallary')->name('edit.gallary');
         Route::post('/gallary/update', 'gallaryUpdate')->name('gallary.update');
-        Route::get('/partner/delete_menu/{id}', 'deleteGallary')->name('delete.gallary');
+        Route::get('/partner/delete_gallary/{id}', 'deleteGallary')->name('delete.gallary');
     });
      // Coupon ////////
      Route::controller(CouponController::class)->group(function () {
         Route::get('/partner/all_coupon', 'allCoupon')->name('coupon.all');
         Route::get('/partner/add_coupon', 'addCoupon')->name('add.coupon');
         Route::post('/partner/coupon/add_submit', 'addCouponSubmit')->name('coupon.add.submit');
-        Route::get('/partner/edit_menu/{id}', 'partnerEditMenu')->name('partner.edit.menu');
-        Route::post('/partner/menu/edit_submit', 'partnerEditMenuSubmit')->name('partner.menu.edit.submit');
-        Route::get('/partner/delete_menu/{id}', 'partnerDeleteMenu')->name('partner.delete.menu');
+        Route::get('/partner/edit_coupon/{id}', 'EditCoupon')->name('edit.coupon');
+        Route::post('/partner/coupon/update', 'updateCoupon')->name('coupon.update');
+        Route::get('/partner/delete_coupon/{id}', 'deleteCoupon')->name('delete.coupon');
     });
 });
+Route::get('/changeStatus', [MenuDetailsController::class, 'changeStatus']);
 require __DIR__ . '/auth.php';

@@ -17,5 +17,8 @@ class MenuDetails extends Model
     public function city(){
         return $this->belongsTo(City::class,'city_id','id');
     }
+    public function partner(){
+        return $this->belongsTo(Partner::class,'partner_id','id');
+    }
 }
 

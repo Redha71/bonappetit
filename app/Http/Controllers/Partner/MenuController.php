@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Partner;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
@@ -13,7 +14,8 @@ class MenuController extends Controller
 
     public function partnerAllMenu()
     {
-        $menu = Menu::latest()->get();
+        $id= Auth::guard('partner')->id();
+        $menu = Menu::where('partner_id',$id)->latest()->get();
         return view('partner.backend.menu.all_menu', compact('menu'));
     }
     //End
@@ -31,8 +33,10 @@ class MenuController extends Controller
             $img = $manager->read($image);
             $img->resize(300, 300)->save(public_path('image/menu_image/' . $name_image));
             $save_path = 'image/menu_image/' . $name_image;
+            
             Menu::create([
                 'menu_name' => $request->menu_name,
+                'partner_id' =>Auth::guard('partner')->id(),
                 'image' => $save_path
             ]);
             $notifiaction = array(

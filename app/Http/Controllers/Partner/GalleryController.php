@@ -13,7 +13,8 @@ class GalleryController extends Controller
 {
     public function galleryAll()
     {
-        $gallery = Gallery::latest()->get();
+        $id= Auth::guard('partner')->id();
+        $gallery = Gallery::where('partner_id',$id)->orderBy('id','desc')->get();
         return view('partner.backend.gallery.all_gallery', compact('gallery'));
     }
     //End

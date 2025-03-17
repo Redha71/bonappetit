@@ -1,38 +1,39 @@
 <?php
 
-namespace App\Http\Controllers\Partner;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Menu;
 use App\Models\MenuDetails;
-use Carbon\Carbon;
+use App\Models\Partner;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
-class MenuDetailsController extends Controller
+class ManageController extends Controller
 {
-    public function partnerAllMenuDetails()
+    public function adminAllMenuDetails()
     {
          $id= Auth::guard('partner')->id();
-        $menu_details = MenuDetails::where('partner_id',$id)->orderBy('id','desc')->get();
-        return view('partner.backend.menu_details.all_menu_details', compact('menu_details'));
+        $menu_details = MenuDetails::orderBy('id','desc')->get();
+        return view('admin.backend.menu_details.all_menu_details', compact('menu_details'));
     }
     //End
-    public function partnerAddMenuDetials()
+    public function adminAddMenuDetials()
     {
-        $id= Auth::guard('partner')->id();
         $category= Category::latest()->get();
-        $menu= Menu::where('partner_id',$id)->orderBy('id','desc')->get();
+        $menu= Menu::orderBy('id','desc')->get();
         $city = City::latest()->get();
-        return view('partner.backend.menu_details.add_menu_details',compact('category','menu','city'));
+        $partner = Partner::latest()->get();
+        return view('admin.backend.menu_details.add_menu_details',compact('category','menu','city','partner'));
     }
     //End
-    public function partnerAddMenuDetialsSubmit(Request $request)
+    public function adminAddMenuDetialsSubmit(Request $request)
     {
         $pCode= IdGenerator::generate(['table'=>'menu_details','field'=>'code','length'=>5,'prefix'=>'BA']);
         if ($request->file('image')) {
@@ -48,7 +49,7 @@ class MenuDetailsController extends Controller
                 'category_id' => $request->category_id,
                 'menu_id' => $request->menu_id,
                 'city_id' => $request->city_id,
-                'partner_id' => Auth::guard('partner')->id(),
+                'partner_id' =>$request->partner_id,
                 'code' => $pCode,
                 'qty' => $request->qty,
                 'price' => $request->price,
@@ -64,20 +65,21 @@ class MenuDetailsController extends Controller
                 'message' => 'Menu Detials Saved Successfully',
                 'alert-type' => 'success'
             );
-            return redirect()->route('partner.all_menu_details')->with($notifiaction);
+            return redirect()->route('admin.all_menu_details')->with($notifiaction);
         }
     }
     //End
-    public function partnerEditMenuDetials($id)
+    public function adminEditMenuDetials($id)
     {
         $category= Category::latest()->get();
-        $menu= Menu::where('partner_id',$id)->orderBy('id','desc')->get();
+        $menu= Menu::orderBy('id','desc')->get();
         $city = City::latest()->get();
         $menuDetials= MenuDetails::find($id);
-        return view('partner.backend.menu_details.edit_menu_details',compact('category','menu','city','menuDetials'));
+        $partner = Partner::latest()->get();
+        return view('admin.backend.menu_details.edit_menu_details',compact('category','menu','city','menuDetials','partner'));
     }
     //End
-    public function partnerEditMenuDetialsSubmit(Request $request){
+    public function adminEditMenuDetialsSubmit(Request $request){
        
         if ($request->file('image')) {
             $image = $request->file('image');
@@ -94,6 +96,7 @@ class MenuDetailsController extends Controller
                 'city_id' => $request->city_id,
                 'qty' => $request->qty,
                 'price' => $request->price,
+                'partner_id'=> $request->partner_id,
                 'discount_price' => $request->discount_price,
                 'most_populer' => $request->most_populer,
                 'best_seller' => $request->best_seller,
@@ -105,7 +108,7 @@ class MenuDetailsController extends Controller
                 'message' => 'Menu Detials Saved Successfully',
                 'alert-type' => 'success'
             );
-            return redirect()->route('partner.all_menu_details')->with($notifiaction);
+            return redirect()->route('admin.all_menu_details')->with($notifiaction);
         }else{
             MenuDetails::find($request->id)->update([
                 'name' => $request->name,
@@ -115,6 +118,7 @@ class MenuDetailsController extends Controller
                 'city_id' => $request->city_id,
                 'qty' => $request->qty,
                 'price' => $request->price,
+                'partner_id'=> $request->partner_id,
                 'discount_price' => $request->discount_price,
                 'most_populer' => $request->most_populer,
                 'best_seller' => $request->best_seller,
@@ -125,11 +129,11 @@ class MenuDetailsController extends Controller
                 'message' => 'Menu Detials Saved Successfully',
                 'alert-type' => 'success'
             );
-            return redirect()->route('partner.all_menu_details')->with($notifiaction);
+            return redirect()->route('admin.all_menu_details')->with($notifiaction);
         }
     }
     //End
-    public function partnerDeleteMenuDetials($id){
+    public function adminDeleteMenuDetials($id){
         $menu_detials = MenuDetails::find($id);
         unlink($menu_detials->image);
         $menu_detials = MenuDetails::find($id)->delete();
@@ -139,12 +143,4 @@ class MenuDetailsController extends Controller
         );
         return redirect()->back()->with($notifiaction);
     }
-    //End 
-    public function changeStatus(Request $request){
-        $menu_detials= MenuDetails::find($request->detials_id);
-        $menu_detials->status=$request->status;
-        $menu_detials->save();
-        return response()->json(['success'=>'Status change successfuly']);
-    }
-    //End
 }
