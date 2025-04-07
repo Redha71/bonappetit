@@ -69,6 +69,14 @@ Route::middleware('admin')->group(function () {
         Route::get('/admin/delete/menu_detials/{id}', 'adminDeleteMenuDetials')->name('admin.delete.menu_detials');
 
     });
+    // Manage Restaurant Pending Activate
+    Route::controller(ManageController::class)->group(function () {
+        Route::get('/pending/restaurant', 'pendingRestaurant')->name('pending.restaurant');
+        Route::get('/changeRestaurantStatus', 'changeRestaurantStatus');
+        Route::get('/active/restaurant', 'activeRestaurant')->name('active.restaurant');
+      
+      
+    });
 });
 
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');

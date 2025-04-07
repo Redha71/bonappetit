@@ -143,4 +143,25 @@ class ManageController extends Controller
         );
         return redirect()->back()->with($notifiaction);
     }
+    //End
+    ////////////////////////////  Pending Active Restaurant   /////////////////////////////
+    public function pendingRestaurant(){
+        $partner= Partner::where('status',0)->get();
+        return view('admin.backend.restaurant.pending_restaurant',compact('partner'));
+
+    }
+    //End
+    public function changeRestaurantStatus(Request $request){
+        $partner=Partner::find($request->detials_id);
+        $partner->status=$request->status;
+        $partner->save();
+        return response()->json(['success'=>'Status change successfuly']);
+    }
+    //End
+    public function activeRestaurant(){
+        $partner= Partner::where('status',1)->get();
+        return view('admin.backend.restaurant.active_restaurant',compact('partner'));
+
+    }
+    //End
 }
