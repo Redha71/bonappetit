@@ -2,7 +2,12 @@
 @section('partner')
 <div class="page-content">
     <div class="container-fluid">
-
+        @php
+        $id = Auth::guard('partner')->id();
+        $partner = App\Models\Partner::find($id);
+        $status=$partner->status;
+    @endphp
+    
         <!-- start page title -->
         <div class="row">
             <div class="col-12">
@@ -19,6 +24,12 @@
                 </div>
             </div>
         </div>
+        @if ($status==='1')
+        The Restaurant is <span class="text-success">Active</span>
+    @else
+    The Restaurant is <span class="text-danger">Inactive</span>
+    <p class="text-danger">Waiting for the Admin to Active the Account</p>
+    @endif
         <!-- end page title -->
 
         <div class="row">

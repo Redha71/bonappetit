@@ -59,23 +59,20 @@ Route::middleware('admin')->group(function () {
         Route::post('/admin/city/edit_submit', 'adminEditCitySubmit')->name('admin.city.edit.submit');
         Route::get('/admin/delete_city/{id}', 'adminDeleteCity')->name('admin.delete.city');
     });
-     // Admin Menu Details ////////
-     Route::controller(ManageController::class)->group(function () {
+    // Admin Menu Details ////////
+    Route::controller(ManageController::class)->group(function () {
         Route::get('/admin/all_menu_details', 'adminAllMenuDetails')->name('admin.all_menu_details');
         Route::get('/admin/add_menu_details', 'adminAddMenuDetials')->name('admin.add_menu_details');
         Route::post('/admin/menu_details/add_submit', 'adminAddMenuDetialsSubmit')->name('admin.menu.detials.add.submit');
         Route::get('/admin/edit_menu_detials/{id}', 'adminEditMenuDetials')->name('admin.edit.menu_detials');
         Route::post('/admin/menu_detials/edit_submit', 'adminEditMenuDetialsSubmit')->name('admin.menu.detials.edit.submit');
         Route::get('/admin/delete/menu_detials/{id}', 'adminDeleteMenuDetials')->name('admin.delete.menu_detials');
-
     });
     // Manage Restaurant Pending Activate
     Route::controller(ManageController::class)->group(function () {
         Route::get('/pending/restaurant', 'pendingRestaurant')->name('pending.restaurant');
         Route::get('/changeRestaurantStatus', 'changeRestaurantStatus');
         Route::get('/active/restaurant', 'activeRestaurant')->name('active.restaurant');
-      
-      
     });
 });
 
@@ -105,6 +102,8 @@ Route::middleware('partner')->group(function () {
     Route::post('/partner/profile_edit', [PartnerController::class, 'partnerProfileEdit'])->name('partner.profile.edit');
     Route::get('/partner/profile/change/password', [PartnerController::class, 'partnerProfileChangePassword'])->name('partner.profile.change.password');
     Route::post('/partner/password/change', [PartnerController::class, 'partnerPasswordChange'])->name('partner.password.change');
+});
+Route::middleware(['partner', 'status'])->group(function () {
     // Menu ////////
     Route::controller(MenuController::class)->group(function () {
         Route::get('/partner/all_menu', 'partnerAllMenu')->name('partner.all_menu');
@@ -122,7 +121,6 @@ Route::middleware('partner')->group(function () {
         Route::get('/partner/edit_menu_detials/{id}', 'partnerEditMenuDetials')->name('partner.edit.menu_detials');
         Route::post('/partner/menu_detials/edit_submit', 'partnerEditMenuDetialsSubmit')->name('partner.menu.detials.edit.submit');
         Route::get('/partner/delete/menu_detials/{id}', 'partnerDeleteMenuDetials')->name('partner.delete.menu_detials');
-
     });
     // Gallery ////////
     Route::controller(GalleryController::class)->group(function () {
@@ -133,8 +131,8 @@ Route::middleware('partner')->group(function () {
         Route::post('/gallary/update', 'gallaryUpdate')->name('gallary.update');
         Route::get('/partner/delete_gallary/{id}', 'deleteGallary')->name('delete.gallary');
     });
-     // Coupon ////////
-     Route::controller(CouponController::class)->group(function () {
+    // Coupon ////////
+    Route::controller(CouponController::class)->group(function () {
         Route::get('/partner/all_coupon', 'allCoupon')->name('coupon.all');
         Route::get('/partner/add_coupon', 'addCoupon')->name('add.coupon');
         Route::post('/partner/coupon/add_submit', 'addCouponSubmit')->name('coupon.add.submit');
